@@ -25,28 +25,28 @@ public class CourseController {
 
     private final CourseRepository courseRepository;
 
-    
-    //@RequestMapping(method = RequestMethod.GET)
+    // @RequestMapping(method = RequestMethod.GET)
     @GetMapping
     public List<Course> list() {
         return courseRepository.findAll();
     }
 
+    // caminho
     @GetMapping("/{id}")
-    public ResponseEntity<Course> findById(@PathVariable Long id){
+    public ResponseEntity<Course> findById(@PathVariable Long id) {
         return courseRepository.findById(id)
-            .map(record -> ResponseEntity.ok().body(record))
-            .orElse(ResponseEntity.notFound().build());
+                .map(record -> ResponseEntity.ok().body(record))
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    //@RequestMapping(method = RequestMethod.POST)
+    // @RequestMapping(method = RequestMethod.POST)
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Course create(@RequestBody Course course) {
-        //System.out.println(course.getName());
+        // System.out.println(course.getName());
         return courseRepository.save(course);
-        //return ResponseEntity.status(HttpStatus.CREATED)
-        //.body(courseRepository.save(course));
+        // return ResponseEntity.status(HttpStatus.CREATED)
+        // .body(courseRepository.save(course));
     }
-    
+
 }
